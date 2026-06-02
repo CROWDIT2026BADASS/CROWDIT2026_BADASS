@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduFuture - Platform Edukasi Digital</title>
+  <meta name="description" content="EduFuture — platform edukasi digital yang ringan, responsif, dan interaktif.">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- ========================================================
+       NAVIGATION
+       js- hooks: #main-nav, .js-nav-toggle
+       State: #main-nav.is-open (mobile menu terbuka)
+       ======================================================== -->
+  <header id="main-header">
+    <nav id="main-nav">
+      <a href="#" class="nav-logo">EduFuture</a>
+
+      <ul class="nav-links">
+        <li><a href="#courses" class="js-smooth-scroll">Kelas</a></li>
+        <li><a href="#features" class="js-smooth-scroll">Fitur</a></li>
+        <li><a href="#schedule" class="js-smooth-scroll">Jadwal</a></li>
+        <li><a href="#testimonials" class="js-smooth-scroll">Ulasan</a></li>
+        <li><a href="#faq" class="js-smooth-scroll">FAQ</a></li>
+      </ul>
+
+      <a href="#courses" class="btn-primary nav-cta js-smooth-scroll">Mulai Belajar</a>
+
+      <button
+        class="nav-hamburger js-nav-toggle"
+        aria-label="Buka/tutup menu navigasi"
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ========================================================
+         HERO SECTION
+         js- hooks: .js-smooth-scroll pada tombol CTA
+         ======================================================== -->
+    <section id="hero">
+      <div class="hero-content js-reveal">
+        <h1 class="hero-title">
+          Belajar Lebih Mudah,<br>
+          <span class="hero-title-accent">Masa Depan Lebih Cerah</span>
+        </h1>
+        <p class="hero-subtitle">
+          Platform edukasi digital yang ringan, interaktif, dan dirancang untuk semua kalangan —
+          dari pelajar hingga profesional.
+        </p>
+        <div class="hero-actions">
+          <a href="#courses" class="btn-primary js-smooth-scroll">
+            <i class="fa-solid fa-rocket" aria-hidden="true"></i>
+            Jelajahi Kelas
+          </a>
+          <a href="#features" class="btn-secondary js-smooth-scroll">Pelajari Fitur</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <strong>10+</strong>
+            <span>Mata Pelajaran</span>
+          </div>
+          <div class="hero-stat">
+            <strong>6+</strong>
+            <span>Kegiatan Bulanan</span>
+          </div>
+          <div class="hero-stat">
+            <strong>100%</strong>
+            <span>Gratis Akses</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual js-reveal">
+        <img
+          src="assets/images/hero-illustration.svg"
+          alt="Ilustrasi seseorang belajar secara online"
+          class="hero-img"
+          width="560"
+          height="420"
+        >
+      </div>
+    </section>
+
+    <!-- ========================================================
+         COURSE CATALOG
+         js- hooks: .js-filter-btn[data-filter], .js-course-grid
+         State: .js-filter-btn.is-active, .js-course-card.is-hidden
+         Cards di-render oleh JS dari data/content.json
+         ======================================================== -->
+    <section id="courses">
+      <div class="section-header js-reveal">
+        <h2>Katalog Kelas</h2>
+        <p>Temukan materi yang sesuai dengan minat dan kebutuhanmu.</p>
+      </div>
+
+      <div class="course-filter js-reveal" role="group" aria-label="Filter kategori kelas">
+        <button class="btn-filter js-filter-btn is-active" data-filter="all">Semua</button>
+        <button class="btn-filter js-filter-btn" data-filter="matematika">Matematika</button>
+        <button class="btn-filter js-filter-btn" data-filter="sains">Sains</button>
+        <button class="btn-filter js-filter-btn" data-filter="bahasa">Bahasa</button>
+        <button class="btn-filter js-filter-btn" data-filter="teknologi">Teknologi</button>
+        <button class="btn-filter js-filter-btn" data-filter="seni">Seni</button>
+      </div>
+
+      <div class="course-grid js-course-grid" aria-live="polite">
+        <!-- Diisi oleh js/main.js → initCourseCatalog() -->
+        <!-- Struktur card yang dihasilkan JS:
+          <article class="course-card js-course-card" data-category="{category}">
+            <div class="course-card__icon">...</div>
+            <div class="course-card__body">
+              <span class="course-card__badge">...</span>
+              <h3 class="course-card__title">...</h3>
+              <p class="course-card__desc">...</p>
+            </div>
+            <div class="course-card__footer">
+              <span class="course-card__duration">...</span>
+              <button class="btn-enroll js-enroll-btn" data-course-id="{id}" data-course-title="{title}">...</button>
+            </div>
+          </article>
+        -->
+      </div>
+    </section>
+
+    <!-- ========================================================
+         LEARNING FEATURES
+         js- hooks: .js-reveal (scroll animation saja)
+         ======================================================== -->
+    <section id="features">
+      <div class="section-header js-reveal">
+        <h2>Mengapa EduFuture?</h2>
+        <p>Keunggulan yang menjadikan pengalaman belajarmu lebih optimal.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card js-reveal">
+          <div class="feature-icon-wrap">
+            <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+          </div>
+          <h3>Akses Cepat</h3>
+          <p>Halaman memuat dalam kurang dari 3 detik bahkan di koneksi internet standar.</p>
+        </div>
+        <div class="feature-card js-reveal">
+          <div class="feature-icon-wrap">
+            <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
+          </div>
+          <h3>Responsif 100%</h3>
+          <p>Tampilan optimal di semua perangkat: desktop, tablet, dan smartphone.</p>
+        </div>
+        <div class="feature-card js-reveal">
+          <div class="feature-icon-wrap">
+            <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+          </div>
+          <h3>Materi Lengkap</h3>
+          <p>Ragam kelas dari berbagai bidang ilmu, mulai dari tingkat dasar hingga lanjutan.</p>
+        </div>
+        <div class="feature-card js-reveal">
+          <div class="feature-icon-wrap">
+            <i class="fa-solid fa-headset" aria-hidden="true"></i>
+          </div>
+          <h3>Komunitas Aktif</h3>
+          <p>Bergabung dengan ribuan pelajar dan pengajar dalam satu ekosistem pembelajaran.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         EVENT SCHEDULE
+         js- hooks: .js-schedule-tbody
+         Rows di-render oleh JS dari data/content.json
+         ======================================================== -->
+    <section id="schedule">
+      <div class="section-header js-reveal">
+        <h2>Jadwal Kegiatan</h2>
+        <p>Jadwal webinar dan kelas daring terdekat yang bisa kamu ikuti.</p>
+      </div>
+
+      <div class="schedule-container js-reveal">
+        <table class="schedule-table" id="schedule-table">
+          <thead>
+            <tr>
+              <th scope="col">Tanggal</th>
+              <th scope="col">Kegiatan</th>
+              <th scope="col">Kategori</th>
+              <th scope="col">Mode</th>
+              <th scope="col">Waktu</th>
+            </tr>
+          </thead>
+          <tbody class="js-schedule-tbody">
+            <!-- Diisi oleh js/main.js → initSchedule() -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         TESTIMONIALS SLIDER
+         js- hooks: #testimonial-slider, .js-testimonial-track,
+                    .js-slide-prev, .js-slide-next, .js-slider-dots
+         State: .js-slider-dot.is-active
+         Slides di-render oleh JS dari data/content.json
+         ======================================================== -->
+    <section id="testimonials">
+      <div class="section-header js-reveal">
+        <h2>Kata Mereka</h2>
+        <p>Pengalaman nyata dari pengguna EduFuture.</p>
+      </div>
+
+      <div class="testimonial-wrapper js-reveal">
+        <div class="testimonial-slider" id="testimonial-slider" aria-label="Ulasan pengguna" aria-roledescription="carousel">
+          <div class="testimonial-track js-testimonial-track">
+            <!-- Diisi oleh js/main.js → initTestimonialSlider() -->
+            <!-- Struktur slide yang dihasilkan JS:
+              <div class="testimonial-slide js-testimonial-slide" role="group">
+                <div class="testimonial-card">
+                  <div class="testimonial-card__rating">...</div>
+                  <blockquote class="testimonial-card__content">...</blockquote>
+                  <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">...</div>
+                    <div>
+                      <p class="testimonial-card__name">...</p>
+                      <p class="testimonial-card__role">...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            -->
+          </div>
+
+          <button class="slider-btn slider-prev js-slide-prev" aria-label="Ulasan sebelumnya">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button class="slider-btn slider-next js-slide-next" aria-label="Ulasan berikutnya">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+
+          <div class="slider-dots js-slider-dots" role="tablist" aria-label="Navigasi slide">
+            <!-- Dots di-render oleh JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         FAQ ACCORDION
+         js- hooks: #faq-accordion
+         State: .js-faq-item.is-open
+         Items di-render oleh JS dari data/content.json
+         ======================================================== -->
+    <section id="faq">
+      <div class="section-header js-reveal">
+        <h2>Pertanyaan Umum</h2>
+        <p>Temukan jawaban cepat atas pertanyaan yang paling sering ditanyakan.</p>
+      </div>
+
+      <div class="faq-accordion js-reveal" id="faq-accordion">
+        <!-- Diisi oleh js/main.js → initFAQ() -->
+        <!-- Struktur item yang dihasilkan JS:
+          <div class="faq-item js-faq-item">
+            <button class="faq-question js-faq-question" aria-expanded="false" aria-controls="faq-answer-{i}">
+              <span>...</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer js-faq-answer" id="faq-answer-{i}" role="region">
+              <p>...</p>
+            </div>
+          </div>
+        -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       FOOTER
+       ======================================================== -->
+  <footer id="main-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-logo">EduFuture</p>
+        <p class="footer-tagline">Mewujudkan pendidikan yang merata dan berkualitas.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#courses" class="js-smooth-scroll">Kelas</a>
+        <a href="#features" class="js-smooth-scroll">Fitur</a>
+        <a href="#schedule" class="js-smooth-scroll">Jadwal</a>
+        <a href="#faq" class="js-smooth-scroll">FAQ</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 EduFuture. Proyek CROWDIT.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
