@@ -11,18 +11,100 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+  <!-- Retro Noise Overlay -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+  
+  <!-- Cinematic Background Glows -->
+  <div class="ambient-glow glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow glow-2" aria-hidden="true"></div>
+  <div class="ambient-glow glow-3" aria-hidden="true"></div>
 
-  <!-- ========================================================
-       NAVIGATION
-       js- hooks: #main-nav, .js-nav-toggle
-       State: #main-nav.is-open (mobile menu terbuka)
-       ======================================================== -->
+  <!-- Cinematic Drafting Frame Overlay -->
+  <div class="cinematic-frame" aria-hidden="true">
+    <div class="frame-corner frame-corner--tl"></div>
+    <div class="frame-corner frame-corner--tr"></div>
+    <div class="frame-corner frame-corner--bl"></div>
+    <div class="frame-corner frame-corner--br"></div>
+    <div class="frame-info frame-info--top-left">LAT: 37.7749° N / LON: 122.4194° W</div>
+    <div class="frame-info frame-info--top-right">SYS.LOC: GRID_ALPHA_9</div>
+    <div class="frame-info frame-info--bottom-left">T+ 00:01:48</div>
+    <div class="frame-info frame-info--bottom-right">EDUFUTURE // v1.0.0</div>
+    <div class="frame-grid-ticks frame-grid-ticks--top"></div>
+    <div class="frame-grid-ticks frame-grid-ticks--bottom"></div>
+    <div class="frame-grid-ticks frame-grid-ticks--left"></div>
+    <div class="frame-grid-ticks frame-grid-ticks--right"></div>
+  </div>
+
+  <!-- Fullscreen Chapter & Navigation Menu Overlay -->
+  <div id="fullscreen-menu" class="fullscreen-menu" aria-hidden="true" role="dialog">
+    <div class="menu-backdrop"></div>
+    
+    <div class="menu-header">
+      <span class="menu-logo">EDUFUTURE</span>
+      <button class="menu-close js-menu-close" aria-label="Tutup menu navigasi">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="menu-content">
+      <!-- Left Column: Navigation List -->
+      <div class="menu-nav-col">
+        <ul class="menu-nav-links">
+          <li data-index="10"><a href="#hero" class="js-menu-link">HOME</a></li>
+          <li data-index="20"><a href="#courses" class="js-menu-link">KELAS</a></li>
+          <li data-index="30"><a href="#features" class="js-menu-link">FITUR</a></li>
+          <li data-index="40"><a href="#schedule" class="js-menu-link">JADWAL</a></li>
+          <li data-index="50"><a href="#testimonials" class="js-menu-link">ULASAN</a></li>
+          <li data-index="60"><a href="#faq" class="js-menu-link">FAQ</a></li>
+        </ul>
+        <div class="menu-nav-selector" aria-hidden="true">
+          <span class="selector-arrow">&lt; -</span>
+          <span class="selector-number">10</span>
+        </div>
+      </div>
+
+      <!-- Right Column: Chapter Cards -->
+      <div class="menu-chapters-col">
+        <div class="chapter-card" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('assets/images/chapter_one_bg.png');">
+          <div class="chapter-card__label">CHAPTER 1</div>
+          <h3 class="chapter-card__title">KELAS POPULER</h3>
+          <p class="chapter-card__desc">Jelajahi ragam bidang ilmu dan pemecahan masalah secara interaktif.</p>
+          <div class="chapter-card__action">MULAI BELAJAR <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+
+        <div class="chapter-card" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('assets/images/chapter_two_bg.png');">
+          <div class="chapter-card__label">CHAPTER 2</div>
+          <h3 class="chapter-card__title">JADWAL KEGIATAN</h3>
+          <p class="chapter-card__desc">Temukan webinar terdekat dan forum diskusi komunitas kami.</p>
+          <div class="chapter-card__action">JELAJAHI JADWAL <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+
+        <div class="chapter-card" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('assets/images/chapter_three_bg.png');">
+          <div class="chapter-card__label">CHAPTER 3</div>
+          <h3 class="chapter-card__title">PERTANYAAN UMUM</h3>
+          <p class="chapter-card__desc">Ada pertanyaan? Kami menyediakan jawaban cepat seputar platform kami.</p>
+          <div class="chapter-card__action">LIHAT FAQ <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-footer">
+      <a href="#" class="menu-footer-link">Kebijakan Privasi</a>
+      <div class="menu-socials">
+        <a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" aria-label="Medium"><i class="fa-brands fa-medium"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      </div>
+    </div>
+  </div>
+
   <header id="main-header">
     <nav id="main-nav">
       <a href="#" class="nav-logo">EduFuture</a>
@@ -90,7 +172,7 @@
       </div>
       <div class="hero-visual js-reveal">
         <img
-          src="assets/images/hero-illustration.svg"
+          src="assets/images/hero-illustration.png"
           alt="Ilustrasi seseorang belajar secara online"
           class="hero-img"
           width="560"
