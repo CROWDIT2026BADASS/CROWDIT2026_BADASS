@@ -17,6 +17,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+  <!-- Cinematic Loading Overlay -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="loader-circle">
+      <span class="loader-text">E</span>
+    </div>
+  </div>
+
   <!-- Retro Noise Overlay -->
   <div class="noise-overlay" aria-hidden="true"></div>
   
@@ -178,6 +185,37 @@
           width="560"
           height="420"
         >
+      </div>
+    </section>
+
+    <!-- ========================================================
+         3D SCROLL-JACKING SCENE (0:18 - 0:30 Video Match, Pure Vanilla JS)
+         ======================================================== -->
+    <section id="cinematic-scroll" class="scene-3d-container">
+      <div class="scene-3d-viewport">
+        <div class="scene-3d-world js-scene-world">
+          
+          <!-- 3D Grid Floor -->
+          <div class="scene-grid-floor"></div>
+          
+          <!-- 3D Text Layers at different Z depths -->
+          <div class="scene-layer" data-z="-4000">
+            <h2 class="scene-title">CHAPTER ONE</h2>
+          </div>
+          <div class="scene-layer" data-z="-3000">
+            <div class="scene-text">JALAN MENUJU</div>
+          </div>
+          <div class="scene-layer" data-z="-2000">
+            <div class="scene-text">MASA DEPAN</div>
+          </div>
+          <div class="scene-layer" data-z="-1000">
+            <div class="scene-text">DIBANGUN OLEH</div>
+          </div>
+          <div class="scene-layer" data-z="0">
+            <div class="scene-text text-red">EDU FUTURE</div>
+          </div>
+          
+        </div>
       </div>
     </section>
 

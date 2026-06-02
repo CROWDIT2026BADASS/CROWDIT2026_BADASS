@@ -1,5 +1,206 @@
 'use strict';
 
+const FALLBACK_DATA = {
+  "courses": [
+    {
+      "id": 1,
+      "category": "matematika",
+      "title": "Aljabar Dasar",
+      "description": "Pelajari konsep variabel, persamaan linear, dan fungsi dari nol hingga mahir.",
+      "level": "Pemula",
+      "duration_minutes": 120,
+      "icon": "📐"
+    },
+    {
+      "id": 2,
+      "category": "matematika",
+      "title": "Kalkulus & Turunan",
+      "description": "Memahami limit, turunan, dan integral untuk persiapan kuliah sains dan teknik.",
+      "level": "Menengah",
+      "duration_minutes": 180,
+      "icon": "📊"
+    },
+    {
+      "id": 3,
+      "category": "sains",
+      "title": "Fisika Mekanika",
+      "description": "Hukum Newton, gerak parabola, dan energi mekanik dijelaskan secara visual dan intuitif.",
+      "level": "Pemula",
+      "duration_minutes": 150,
+      "icon": "⚛️"
+    },
+    {
+      "id": 4,
+      "category": "sains",
+      "title": "Kimia Organik",
+      "description": "Memahami struktur molekul, reaksi substitusi, dan eliminasi dalam kimia organik.",
+      "level": "Menengah",
+      "duration_minutes": 160,
+      "icon": "🧪"
+    },
+    {
+      "id": 5,
+      "category": "bahasa",
+      "title": "Bahasa Inggris Sehari-hari",
+      "description": "Percakapan praktis, tata bahasa dasar, dan kosakata untuk komunikasi harian.",
+      "level": "Pemula",
+      "duration_minutes": 90,
+      "icon": "💬"
+    },
+    {
+      "id": 6,
+      "category": "bahasa",
+      "title": "Public Speaking",
+      "description": "Teknik berbicara di depan umum, storytelling, dan manajemen rasa gugup.",
+      "level": "Menengah",
+      "duration_minutes": 100,
+      "icon": "🎤"
+    },
+    {
+      "id": 7,
+      "category": "teknologi",
+      "title": "Dasar Pemrograman Python",
+      "description": "Variabel, kondisional, perulangan, dan fungsi — fondasi berpikir komputasional.",
+      "level": "Pemula",
+      "duration_minutes": 200,
+      "icon": "🐍"
+    },
+    {
+      "id": 8,
+      "category": "teknologi",
+      "title": "Web Development Dasar",
+      "description": "HTML, CSS, dan JavaScript dasar untuk membangun halaman web pertamamu.",
+      "level": "Pemula",
+      "duration_minutes": 240,
+      "icon": "🌐"
+    },
+    {
+      "id": 9,
+      "category": "seni",
+      "title": "Desain Grafis Digital",
+      "description": "Prinsip desain, teori warna, dan tipografi menggunakan tools desain modern.",
+      "level": "Pemula",
+      "duration_minutes": 130,
+      "icon": "🎨"
+    },
+    {
+      "id": 10,
+      "category": "matematika",
+      "title": "Statistika & Probabilitas",
+      "description": "Distribusi data, uji hipotesis, dan analisis regresi untuk kebutuhan riset.",
+      "level": "Lanjutan",
+      "duration_minutes": 210,
+      "icon": "📈"
+    }
+  ],
+  "schedule": [
+    {
+      "event_name": "Webinar: Strategi Belajar Efektif di Era Digital",
+      "category": "umum",
+      "event_date": "2026-06-10",
+      "event_time": "09.00 - 11.00 WIB",
+      "mode": "online"
+    },
+    {
+      "event_name": "Workshop Python untuk Pemula",
+      "category": "teknologi",
+      "event_date": "2026-06-14",
+      "event_time": "13.00 - 16.00 WIB",
+      "mode": "online"
+    },
+    {
+      "event_name": "Kelas Intensif Aljabar & Persiapan UTBK",
+      "category": "matematika",
+      "event_date": "2026-06-18",
+      "event_time": "08.00 - 12.00 WIB",
+      "mode": "offline"
+    },
+    {
+      "event_name": "Seminar Kimia: Dunia di Balik Molekul",
+      "category": "sains",
+      "event_date": "2026-06-22",
+      "event_time": "10.00 - 12.00 WIB",
+      "mode": "online"
+    },
+    {
+      "event_name": "Bootcamp Desain Grafis — Batch 3",
+      "category": "seni",
+      "event_date": "2026-06-28",
+      "event_time": "09.00 - 17.00 WIB",
+      "mode": "offline"
+    },
+    {
+      "event_name": "Talk Show: Karier di Bidang Teknologi",
+      "category": "teknologi",
+      "event_date": "2026-07-05",
+      "event_time": "14.00 - 16.00 WIB",
+      "mode": "online"
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Rina Septiani",
+      "role": "Mahasiswa Teknik Informatika",
+      "content": "EduFuture benar-benar mengubah cara saya belajar pemrograman. Materinya mudah dipahami dan bisa diakses kapan saja tanpa harus install aplikasi berat.",
+      "rating": 5
+    },
+    {
+      "name": "Budi Santoso",
+      "role": "Guru SMA Negeri 3",
+      "content": "Sebagai pengajar, saya terkesan dengan kualitas konten dan kemudahan navigasinya. Saya rekomendasikan ke semua murid saya untuk belajar mandiri di sini.",
+      "rating": 5
+    },
+    {
+      "name": "Citra Dewi",
+      "role": "Pelajar SMA, Kelas 12",
+      "content": "Jadwal webinar dan kelasnya sangat membantu persiapan UTBK saya. Penjelasan dari instruktur jelas dan langsung ke inti pembahasan.",
+      "rating": 4
+    },
+    {
+      "name": "Andi Firmansyah",
+      "role": "Fresh Graduate, Jurusan Ekonomi",
+      "content": "Kursus Public Speaking di EduFuture sangat membantu saya dalam menghadapi sesi wawancara kerja. Materi praktis dan bisa langsung diaplikasikan.",
+      "rating": 5
+    },
+    {
+      "name": "Dewi Lestari",
+      "role": "Desainer Freelance",
+      "content": "Saya mulai belajar desain grafis dari nol lewat EduFuture. Sekarang saya sudah bisa mengerjakan proyek klien sendiri. Platform terbaik untuk belajar mandiri!",
+      "rating": 5
+    }
+  ],
+  "faq": [
+    {
+      "question": "Apakah semua kelas di EduFuture gratis?",
+      "answer": "Ya, EduFuture adalah platform purwarupa (prototype) yang dirancang untuk mendemonstrasikan kemudahan akses pendidikan. Semua konten yang tersedia saat ini dapat diakses secara gratis tanpa perlu membuat akun."
+    },
+    {
+      "question": "Apakah saya perlu menginstal aplikasi untuk mengakses EduFuture?",
+      "answer": "Tidak perlu! EduFuture dirancang sebagai platform berbasis web yang ringan. Cukup buka melalui peramban (Chrome, Firefox, Safari, Edge) di perangkat apapun — desktop, tablet, maupun smartphone."
+    },
+    {
+      "question": "Bagaimana cara mendaftar ke sebuah kelas?",
+      "answer": "Cukup klik tombol 'Daftar' pada kartu kelas yang kamu minati di bagian Katalog Kelas. Kamu akan langsung terdaftar dan mendapat akses ke materi tersebut."
+    },
+    {
+      "question": "Apakah ada sertifikat setelah menyelesaikan kelas?",
+      "answer": "Fitur sertifikat dijadwalkan hadir pada pengembangan berikutnya. Pada versi prototype ini, fokus kami adalah kemudahan akses materi dan kenyamanan pengalaman belajar."
+    },
+    {
+      "question": "Bagaimana cara mendaftar webinar atau kelas offline?",
+      "answer": "Temukan kegiatan yang kamu inginkan di bagian Jadwal Kegiatan, lalu hubungi tim EduFuture melalui informasi kontak yang tersedia. Kami akan mengirimkan detail pendaftaran dan tautan kegiatan melalui email."
+    },
+    {
+      "question": "Apakah materi di EduFuture cocok untuk semua tingkat kemampuan?",
+      "answer": "Ya. Setiap kelas memiliki label tingkat kesulitan (Pemula, Menengah, Lanjutan) sehingga kamu bisa memilih materi yang paling sesuai dengan kemampuan dan tujuan belajarmu saat ini."
+    },
+    {
+      "question": "Bisakah saya mengakses EduFuture di smartphone?",
+      "answer": "Tentu saja! EduFuture dibangun dengan prinsip mobile-first dan responsif penuh. Tampilan dan fungsionalitas berjalan optimal di semua ukuran layar, termasuk smartphone dengan lebar layar di bawah 576px."
+    }
+  ]
+};
+
 // ============================================================
 // DATA LOADER
 // ============================================================
@@ -9,29 +210,106 @@ async function loadContent() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return await response.json();
   } catch (err) {
-    console.error('[EduFuture] Gagal memuat content.json:', err.message);
-    return null;
+    console.warn('[EduFuture] Gagal memuat content.json via fetch, menggunakan fallback local data:', err.message);
+    return FALLBACK_DATA;
   }
 }
 
 // ============================================================
-// MOBILE NAV TOGGLE
+// FULLSCREEN CHAPTER MENU & NAVIGATION
 // ============================================================
-function initMobileNav() {
-  const nav = document.getElementById('main-nav');
+function initFullscreenMenu() {
+  const menu = document.getElementById('fullscreen-menu');
   const toggleBtn = document.querySelector('.js-nav-toggle');
-  if (!nav || !toggleBtn) return;
+  const closeBtn = document.querySelector('.js-menu-close');
+  const menuLinks = document.querySelectorAll('.js-menu-link');
+  const selector = document.querySelector('.menu-nav-selector');
+  const navCol = document.querySelector('.menu-nav-col');
 
-  toggleBtn.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('is-open');
-    toggleBtn.setAttribute('aria-expanded', String(isOpen));
+  if (!menu || !toggleBtn) return;
+
+  function openMenu() {
+    menu.classList.add('is-open');
+    document.body.classList.add('menu-open');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu() {
+    menu.classList.remove('is-open');
+    document.body.classList.remove('menu-open');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    if (selector) selector.classList.remove('is-visible');
+  }
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (menu.classList.contains('is-open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
 
-  nav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('is-open');
-      toggleBtn.setAttribute('aria-expanded', 'false');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeMenu);
+  }
+
+  menuLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      e.preventDefault();
+      
+      // Simulate page transition with loading overlay
+      const loader = document.getElementById('loading-overlay');
+      if (loader) {
+        loader.classList.add('is-active');
+        
+        setTimeout(() => {
+          closeMenu();
+          target.scrollIntoView({ behavior: 'auto', block: 'start' });
+          
+          setTimeout(() => {
+            loader.classList.remove('is-active');
+          }, 800); // Hide loader after 800ms
+        }, 600); // Wait for loader to appear
+      } else {
+        closeMenu();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
+
+    link.addEventListener('mouseenter', () => {
+      if (!selector || !navCol) return;
+      
+      const linkLi = link.closest('li');
+      const indexVal = linkLi.dataset.index || '10';
+      
+      const liRect = linkLi.getBoundingClientRect();
+      const parentRect = navCol.getBoundingClientRect();
+      const topOffset = liRect.top - parentRect.top + (liRect.height / 2) - (selector.getBoundingClientRect().height / 2);
+      
+      selector.style.top = `${topOffset}px`;
+      selector.querySelector('.selector-number').textContent = indexVal;
+      selector.classList.add('is-visible');
+    });
+  });
+
+  const linksList = document.querySelector('.menu-nav-links');
+  if (linksList && selector) {
+    linksList.addEventListener('mouseleave', () => {
+      selector.classList.remove('is-visible');
+    });
+  }
+
+  menu.addEventListener('click', (e) => {
+    if (e.target === menu || e.target.classList.contains('menu-backdrop')) {
+      closeMenu();
+    }
   });
 }
 
@@ -352,13 +630,84 @@ function initFAQ(faqs) {
 }
 
 // ============================================================
+// 3D SCROLL-JACKING SCENE (Pure Vanilla JS, No Libraries)
+// ============================================================
+function initCinematicScroll() {
+  const container = document.querySelector('.scene-3d-container');
+  const world = document.querySelector('.js-scene-world');
+  const layers = document.querySelectorAll('.scene-layer');
+
+  if (!container || !world) return;
+
+  // Initialize layers to their exact Z positions
+  layers.forEach(layer => {
+    const z = layer.getAttribute('data-z') || 0;
+    layer.style.transform = `translate(-50%, -50%) translateZ(${z}px)`;
+  });
+
+  let currentScroll = 0;
+  let targetScroll = 0;
+  const maxZ = 6000; // How far the camera flies forward
+  
+  // Parallax variables
+  let mouseX = 0;
+  let mouseY = 0;
+  let targetRotX = 0;
+  let targetRotY = 0;
+  let currentRotX = 0;
+  let currentRotY = 0;
+
+  // Smooth scroll and parallax interpolation (Lerp)
+  function render() {
+    // Linear Interpolation for buttery smoothness
+    currentScroll += (targetScroll - currentScroll) * 0.08;
+    currentRotX += (targetRotX - currentRotX) * 0.05;
+    currentRotY += (targetRotY - currentRotY) * 0.05;
+
+    // Move the world towards the camera (positive Z) and apply mouse parallax rotation
+    const zMove = currentScroll * maxZ;
+    world.style.transform = `translateZ(${zMove}px) rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
+
+    requestAnimationFrame(render);
+  }
+
+  // Update target based on scroll position
+  window.addEventListener('scroll', () => {
+    const rect = container.getBoundingClientRect();
+    const scrollableDistance = rect.height - window.innerHeight;
+    
+    if (scrollableDistance <= 0) return;
+    
+    let progress = -rect.top / scrollableDistance;
+    progress = Math.max(0, Math.min(1, progress));
+    
+    targetScroll = progress;
+  }, { passive: true });
+
+  // Update parallax targets on mouse move
+  window.addEventListener('mousemove', (e) => {
+    // Normalize mouse coordinates from -1 to 1
+    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+    mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+    
+    // Convert to subtle degrees (e.g., max 5 degrees rotation)
+    targetRotY = mouseX * 5;
+    targetRotX = -mouseY * 5; // Invert Y for natural feel
+  });
+
+  // Start the render loop
+  requestAnimationFrame(render);
+}
+
+// ============================================================
 // INIT
 // ============================================================
 async function init() {
-  initMobileNav();
+  initFullscreenMenu();
   initSmoothScroll();
   initScrollReveal();
   initStickyHeader();
+  initCinematicScroll();
 
   const data = await loadContent();
   if (!data) return;

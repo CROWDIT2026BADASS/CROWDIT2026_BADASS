@@ -1,1 +1,8 @@
-node_modules/\ndist/\n.env
+node_modules/
+dist/
+.env
+screencast
+screencast/
+*.mp4
+*.webm
+*.mkv
