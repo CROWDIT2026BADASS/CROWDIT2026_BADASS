@@ -230,9 +230,15 @@
     </section>
 
     <!-- ========================================================
+         SLIDE WRAPPER FOR PPT WIPE TRANSITION
+         ======================================================== -->
+    <div id="slide-wrapper" class="slide-wrapper">
+
+    <!-- ========================================================
          COURSE CATALOG
          ======================================================== -->
-    <section id="courses" class="container py-5 mt-5 position-relative z-1">
+    <section id="courses" class="slide-section bg-skew-1" style="z-index: 10;">
+      <div class="slide-content container position-relative z-1">
       <div class="section-header js-reveal mb-5 border-start border-danger border-4 ps-4">
         <h2 class="display-3 text-uppercase text-white lh-1 mb-2 font-display">Katalog Kelas</h2>
         <p class="fs-5 text-danger text-uppercase tracking-wider font-heading mb-0">Temukan materi yang sesuai dengan minat dan kebutuhanmu.</p>
@@ -250,12 +256,14 @@
       <div class="row g-4 js-course-grid" aria-live="polite">
         <!-- Diisi oleh js/main.js -->
       </div>
+      </div>
     </section>
 
     <!-- ========================================================
-         LEARNING FEATURES
+         WHY EDUTECH
          ======================================================== -->
-    <section id="features" class="container py-5 my-5 position-relative z-1">
+    <section id="features" class="slide-section bg-skew-2" style="z-index: 9;">
+      <div class="slide-content container position-relative z-1">
       <div class="section-header js-reveal mb-5 border-start border-danger border-4 ps-4">
         <h2 class="display-3 text-uppercase text-white lh-1 mb-2 font-display">Mengapa EduTech?</h2>
         <p class="fs-5 text-danger text-uppercase tracking-wider font-heading mb-0">Keunggulan yang menjadikan pengalaman belajarmu lebih optimal.</p>
@@ -307,12 +315,14 @@
           </div>
         </div>
       </div>
+      </div>
     </section>
 
     <!-- ========================================================
-         EVENT SCHEDULE
+         SCHEDULE
          ======================================================== -->
-    <section id="schedule" class="container py-5 my-5 position-relative z-1">
+    <section id="schedule" class="slide-section bg-skew-3" style="z-index: 8;">
+      <div class="slide-content container bg-dark border border-secondary rounded-4 shadow-lg position-relative overflow-hidden">
       <div class="section-header js-reveal mb-5 border-start border-danger border-4 ps-4">
         <h2 class="display-3 text-uppercase text-white lh-1 mb-2 font-display">Jadwal Kegiatan</h2>
         <p class="fs-5 text-danger text-uppercase tracking-wider font-heading mb-0">Jadwal webinar dan kelas daring terdekat yang bisa kamu ikuti.</p>
@@ -334,12 +344,14 @@
           </tbody>
         </table>
       </div>
+      </div>
     </section>
 
     <!-- ========================================================
-         TESTIMONIALS SLIDER
+         TESTIMONIALS
          ======================================================== -->
-    <section id="testimonials" class="container py-5 my-5 position-relative z-1">
+    <section id="testimonials" class="slide-section bg-skew-4" style="z-index: 7;">
+      <div class="slide-content container text-center position-relative z-1">
       <div class="section-header js-reveal mb-5 border-start border-danger border-4 ps-4">
         <h2 class="display-3 text-uppercase text-white lh-1 mb-2 font-display">Kata Mereka</h2>
         <p class="fs-5 text-danger text-uppercase tracking-wider font-heading mb-0">Pengalaman nyata dari pengguna EduTech.</p>
@@ -363,12 +375,14 @@
           </div>
         </div>
       </div>
+      </div>
     </section>
 
     <!-- ========================================================
-         FAQ ACCORDION
+         FAQ
          ======================================================== -->
-    <section id="faq" class="container py-5 my-5 position-relative z-1">
+    <section id="faq" class="slide-section bg-skew-1" style="z-index: 6;">
+      <div class="slide-content container position-relative z-1">
       <div class="section-header js-reveal mb-5 border-start border-danger border-4 ps-4">
         <h2 class="display-3 text-uppercase text-white lh-1 mb-2 font-display">Pertanyaan Umum</h2>
         <p class="fs-5 text-danger text-uppercase tracking-wider font-heading mb-0">Temukan jawaban cepat atas pertanyaan yang paling sering ditanyakan.</p>
@@ -377,7 +391,10 @@
       <div class="accordion accordion-flush js-reveal mx-auto" id="faq-accordion" style="max-width: 900px;">
         <!-- Diisi oleh js/main.js -->
       </div>
+      </div>
     </section>
+
+    </div> <!-- End of slide-wrapper -->
 
   </main>
 

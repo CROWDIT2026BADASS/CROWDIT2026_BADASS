@@ -379,7 +379,7 @@ function initSmoothScroll() {
 // SCROLL REVEAL — Intersection Observer
 // ============================================================
 function initScrollReveal() {
-  const elements = document.querySelectorAll('.js-reveal');
+  const elements = document.querySelectorAll('.js-reveal, .skew-reveal');
   if (!elements.length) return;
 
   const observer = new IntersectionObserver(
@@ -747,6 +747,56 @@ function initCinematicScroll() {
 }
 
 // ============================================================
+// PPT SLIDE TRANSITION (Section Wipe)
+// ============================================================
+function initSlideWipe() {
+  const slideWrapper = document.getElementById('slide-wrapper');
+  if (!slideWrapper) return;
+  
+  const slides = slideWrapper.querySelectorAll('.slide-section');
+  if (slides.length === 0) return;
+
+  // Set total height of the wrapper to accommodate all slides
+  // Each slide represents 100vh of scrolling to wipe away
+  slideWrapper.style.height = `${slides.length * 100}vh`;
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const wh = window.innerHeight;
+    const wrapperTop = slideWrapper.offsetTop;
+
+    slides.forEach((slide, index) => {
+      // The last slide doesn't wipe away, it stays visible at the end
+      if (index === slides.length - 1) {
+        slide.style.clipPath = 'polygon(0 0, 100% 0, 100% 100%, 0 100%)';
+        return;
+      }
+
+      // The point where this slide starts wiping away
+      const wipeStart = wrapperTop + (index * wh);
+      const wipeEnd = wipeStart + wh;
+
+      let progress = 0;
+      if (scrollY >= wipeStart && scrollY <= wipeEnd) {
+        progress = (scrollY - wipeStart) / wh;
+      } else if (scrollY > wipeEnd) {
+        progress = 1;
+      }
+
+      // Calculate diagonal cut
+      // Start (p=0): BL=120%, BR=100% (Fully visible)
+      // End (p=1): BL=-20%, BR=-40% (Fully wiped/hidden)
+      // The diagonal is constant: Left side is always 20% lower than Right side
+      let bl = 120 - (progress * 140);
+      let br = 100 - (progress * 140);
+
+      // Apply dynamic clip-path
+      slide.style.clipPath = `polygon(0 0, 100% 0, 100% ${br}%, 0 ${bl}%)`;
+    });
+  }, { passive: true });
+}
+
+// ============================================================
 // INIT
 // ============================================================
 async function init() {
@@ -755,6 +805,7 @@ async function init() {
   initScrollReveal();
   initStickyHeader();
   initCinematicScroll();
+  initSlideWipe();
 
   const data = await loadContent();
   if (!data) return;

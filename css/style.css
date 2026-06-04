@@ -1070,3 +1070,75 @@ body.menu-open {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(-360deg); }
 }
+
+/* ==========================================================================
+   SCROLL SKEW SECTIONS (PPT Slide Transition Layout)
+   ========================================================================== */
+.slide-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.slide-section {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--color-dark);
+  background-position: center;
+  background-size: cover;
+  /* Initial state: fully visible */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  will-change: clip-path;
+}
+
+.slide-content {
+  height: 100%;
+  overflow-y: auto;
+  /* Padding for navbar and visual balance */
+  padding-top: 100px;
+  padding-bottom: 80px;
+  /* Custom scrollbar for inner content */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-danger) transparent;
+}
+
+.slide-content::-webkit-scrollbar {
+  width: 6px;
+}
+.slide-content::-webkit-scrollbar-thumb {
+  background-color: var(--color-danger);
+  border-radius: 10px;
+}
+
+/* Glowing Neon Edge to destroy the "flat" look */
+.slide-section::before {
+  content: '';
+  position: absolute;
+  /* The line position is dynamic, so we place it at the bottom 
+     and it will be clipped naturally by the section's clip-path! */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* We use a drop-shadow on the element wrapper or a border.
+     Since clip-path cuts things off, the easiest way to add an edge line 
+     is via JS or a very specific gradient. We'll skip the pseudo-element 
+     for now to keep the JS wipe perfectly clean as requested. */
+}
+
+/* Rich Backgrounds instead of flat colors */
+.bg-skew-1 { 
+  background-image: radial-gradient(circle at 50% 50%, #1f1f1f 0%, #0a0a0a 100%); 
+}
+.bg-skew-2 { 
+  background-image: radial-gradient(circle at 100% 0%, #2a1111 0%, #0f0f0f 100%); 
+}
+.bg-skew-3 { 
+  background-image: radial-gradient(circle at 0% 100%, #1a1a2e 0%, #050505 100%); 
+}
+.bg-skew-4 { 
+  background-image: linear-gradient(135deg, #161616 0%, #000000 100%); 
+}
