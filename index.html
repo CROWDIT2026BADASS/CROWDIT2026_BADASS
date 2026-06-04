@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EduFuture - Platform Edukasi Digital</title>
-  <meta name="description" content="EduFuture — platform edukasi digital yang ringan, responsif, dan interaktif.">
+  <title>EduTech - Platform Edukasi Digital</title>
+  <meta name="description" content="EduTech — platform edukasi digital yang ringan, responsif, dan interaktif.">
 
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -44,7 +44,7 @@
     <div class="frame-info frame-info--top-left">LAT: 37.7749° N / LON: 122.4194° W</div>
     <div class="frame-info frame-info--top-right">SYS.LOC: GRID_ALPHA_9</div>
     <div class="frame-info frame-info--bottom-left">T+ 00:01:48</div>
-    <div class="frame-info frame-info--bottom-right">EDUFUTURE // v1.0.0</div>
+    <div class="frame-info frame-info--bottom-right">EDUTECH // v1.0.0</div>
     <div class="frame-grid-ticks frame-grid-ticks--top"></div>
     <div class="frame-grid-ticks frame-grid-ticks--bottom"></div>
     <div class="frame-grid-ticks frame-grid-ticks--left"></div>
@@ -57,7 +57,7 @@
     <div class="menu-backdrop"></div>
     
     <div class="menu-header">
-      <span class="menu-logo">EDUFUTURE</span>
+      <span class="menu-logo">EDUTECH</span>
       <button class="menu-close js-menu-close" aria-label="Tutup menu navigasi">
         <i class="fa-solid fa-xmark"></i>
       </button>
@@ -67,12 +67,12 @@
       <!-- Left Column: Navigation List -->
       <div class="menu-nav-col">
         <ul class="menu-nav-links">
-          <li data-index="10"><a href="#" class="js-menu-link menu-link-active">HOME</a></li>
-          <li data-index="20"><a href="#" class="js-menu-link">MISSION</a></li>
-          <li data-index="30"><a href="#" class="js-menu-link">TECHNOLOGY</a></li>
-          <li data-index="40"><a href="#" class="js-menu-link">NEWS</a></li>
-          <li data-index="50"><a href="#" class="js-menu-link">PARTNERS</a></li>
-          <li data-index="60"><a href="#" class="js-menu-link">CONNECT</a></li>
+          <li data-index="10"><a href="#hero" class="js-menu-link menu-link-active">BERANDA</a></li>
+          <li data-index="20"><a href="#courses" class="js-menu-link">KELAS</a></li>
+          <li data-index="30"><a href="#features" class="js-menu-link">FITUR</a></li>
+          <li data-index="40"><a href="#schedule" class="js-menu-link">JADWAL</a></li>
+          <li data-index="50"><a href="#testimonials" class="js-menu-link">ULASAN</a></li>
+          <li data-index="60"><a href="#faq" class="js-menu-link">FAQ</a></li>
         </ul>
         <div class="menu-nav-selector" aria-hidden="true">
           <span class="selector-arrow">&lt; -</span>
@@ -82,25 +82,25 @@
 
       <!-- Right Column: Chapter Cards -->
       <div class="menu-chapters-col">
-        <div class="chapter-card js-chapter-card" data-chapter="1" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('assets/images/chapter1_lowpoly.png');">
-          <div class="chapter-card__label">CHAPTER 1</div>
-          <h3 class="chapter-card__title">FUEL FROM THE AIR</h3>
-          <p class="chapter-card__desc">Discover the beginning of the journey.</p>
-          <div class="chapter-card__action">ENTER CHAPTER <i class="fa-solid fa-arrow-right"></i></div>
+        <div class="chapter-card js-chapter-card" data-chapter="1" style="background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75));">
+          <div class="chapter-card__label">KELAS UNGGULAN</div>
+          <h3 class="chapter-card__title">WEB DEVELOPMENT</h3>
+          <p class="chapter-card__desc">Mulai karirmu sebagai developer handal.</p>
+          <div class="chapter-card__action">LIHAT DETAIL <i class="fa-solid fa-arrow-right"></i></div>
         </div>
 
-        <div class="chapter-card js-chapter-card" data-chapter="2" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('assets/images/chapter2_lowpoly.png');">
-          <div class="chapter-card__label">CHAPTER 2</div>
-          <h3 class="chapter-card__title">THE ROAD TO NET ZERO</h3>
-          <p class="chapter-card__desc">Paving the way for a sustainable future.</p>
-          <div class="chapter-card__action">ENTER CHAPTER <i class="fa-solid fa-arrow-right"></i></div>
+        <div class="chapter-card js-chapter-card" data-chapter="2" style="background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75));">
+          <div class="chapter-card__label">KELAS UNGGULAN</div>
+          <h3 class="chapter-card__title">DESAIN GRAFIS</h3>
+          <p class="chapter-card__desc">Tingkatkan kreativitas visual dan desainmu.</p>
+          <div class="chapter-card__action">LIHAT DETAIL <i class="fa-solid fa-arrow-right"></i></div>
         </div>
 
-        <div class="chapter-card js-chapter-card" data-chapter="3" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('assets/images/chapter3_lowpoly.png');">
-          <div class="chapter-card__label">CHAPTER 3</div>
-          <h3 class="chapter-card__title">THE NEED FOR SPEED</h3>
-          <p class="chapter-card__desc">Accelerating the transition to clean energy.</p>
-          <div class="chapter-card__action">ENTER CHAPTER <i class="fa-solid fa-arrow-right"></i></div>
+        <div class="chapter-card js-chapter-card" data-chapter="3" style="background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75));">
+          <div class="chapter-card__label">KELAS UNGGULAN</div>
+          <h3 class="chapter-card__title">DATA SCIENCE</h3>
+          <p class="chapter-card__desc">Pelajari fondasi analisis data modern.</p>
+          <div class="chapter-card__action">LIHAT DETAIL <i class="fa-solid fa-arrow-right"></i></div>
         </div>
       </div>
     </div>
@@ -123,17 +123,17 @@
     <div class="splatter splatter-red splatter-3"></div>
   </div>
 
-  <!-- Cinematic Final Scene (Muscle Car) -->
+  <!-- Cinematic Final Scene -->
   <div id="final-cinematic-scene" class="final-cinematic-scene" aria-hidden="true">
-    <div class="scene-background" style="background-image: url('assets/images/muscle_car_canyon.png');"></div>
+    <div class="scene-background" style="background: var(--color-dark);"></div>
     <div class="scene-text-overlay">
-      <h2>CHAPTER 1 <br> FUEL FROM THE AIR</h2>
+      <h2>SELAMAT DATANG <br> DI KELAS UNGGULAN</h2>
     </div>
   </div>
 
   <header id="main-header" class="fixed-top transition-smooth w-100 z-3">
     <nav id="main-nav" class="d-flex justify-content-between align-items-center py-4 px-4 px-md-5 mx-auto">
-      <a href="#" class="nav-logo text-decoration-none">EduFuture</a>
+      <a href="#" class="nav-logo text-decoration-none">EduTech</a>
 
       <ul class="nav-links d-none list-unstyled m-0 gap-4">
         <li><a href="#courses" class="text-white text-decoration-none js-smooth-scroll">Kelas</a></li>
@@ -200,11 +200,6 @@
         </div>
       </div>
       <div class="hero-visual js-reveal position-absolute z-0 opacity-25" style="right: -5%; top: 10%; width: 50vw; height: 80vh; transform: skewX(-20deg); pointer-events: none;">
-        <img
-          src="assets/images/hero-illustration.png"
-          alt="Ilustrasi seseorang belajar secara online"
-          class="w-100 h-100 object-fit-cover"
-        >
       </div>
     </section>
 
@@ -262,7 +257,7 @@
          ======================================================== -->
     <section id="features" class="container py-5 my-5 position-relative z-1">
       <div class="section-header js-reveal mb-5 border-start border-danger border-4 ps-4">
-        <h2 class="display-3 text-uppercase text-white lh-1 mb-2 font-display">Mengapa EduFuture?</h2>
+        <h2 class="display-3 text-uppercase text-white lh-1 mb-2 font-display">Mengapa EduTech?</h2>
         <p class="fs-5 text-danger text-uppercase tracking-wider font-heading mb-0">Keunggulan yang menjadikan pengalaman belajarmu lebih optimal.</p>
       </div>
 
@@ -347,7 +342,7 @@
     <section id="testimonials" class="container py-5 my-5 position-relative z-1">
       <div class="section-header js-reveal mb-5 border-start border-danger border-4 ps-4">
         <h2 class="display-3 text-uppercase text-white lh-1 mb-2 font-display">Kata Mereka</h2>
-        <p class="fs-5 text-danger text-uppercase tracking-wider font-heading mb-0">Pengalaman nyata dari pengguna EduFuture.</p>
+        <p class="fs-5 text-danger text-uppercase tracking-wider font-heading mb-0">Pengalaman nyata dari pengguna EduTech.</p>
       </div>
 
       <div class="testimonial-wrapper js-reveal position-relative mx-auto" style="max-width: 1000px;">
@@ -393,7 +388,7 @@
     <div class="container">
       <div class="d-flex flex-wrap justify-content-between align-items-end gap-4 mb-4">
         <div class="footer-brand">
-          <p class="font-display text-danger text-uppercase lh-1 mb-2" style="font-size: 4rem;">EduFuture</p>
+          <p class="font-display text-danger text-uppercase lh-1 mb-2" style="font-size: 4rem;">EduTech</p>
           <p class="font-heading text-secondary text-uppercase tracking-wider mb-0 fs-5">Mewujudkan pendidikan yang merata dan berkualitas.</p>
         </div>
         <div class="footer-links d-flex gap-4">
@@ -403,7 +398,7 @@
           <a href="#faq" class="font-display fs-4 text-white text-decoration-none js-smooth-scroll">FAQ</a>
         </div>
       </div>
-      <p class="text-secondary mb-0">&copy; 2026 EduFuture. Proyek CROWDIT.</p>
+      <p class="text-secondary mb-0">&copy; 2026 EduTech. Proyek CROWDIT.</p>
     </div>
   </footer>
 

@@ -1,6 +1,6 @@
 # Panduan Kolaborasi Tim Frontend: HTML/CSS & JavaScript
 
-Dokumen ini berisi kesepakatan (SOP) antara pengembang HTML/CSS (UI/UX) dan pengembang JavaScript (Logic/Interaktivitas) untuk mencegah bentrok, mengurangi *bug*, dan memastikan kelancaran *development* website EduFuture.
+Dokumen ini berisi kesepakatan (SOP) antara pengembang HTML/CSS (UI/UX) dan pengembang JavaScript (Logic/Interaktivitas) untuk mencegah bentrok, mengurangi *bug*, dan memastikan kelancaran *development* website EduTech.
 
 ---
 

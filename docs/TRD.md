@@ -21,7 +21,7 @@
 Struktur file dirancang agar rapi, modular, dan mematuhi standar pengembangan *frontend* modern:
 
 ```text
-edufuture-project/
+edutech-project/
 │
 ├── index.html              # Halaman utama aplikasi
 ├── css/

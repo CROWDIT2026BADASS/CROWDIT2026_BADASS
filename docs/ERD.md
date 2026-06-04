@@ -1,6 +1,6 @@
 # Entity Relationship Diagram (ERD) Konseptual
 
-Meskipun EduFuture adalah website statis, ERD konseptual ini disertakan dalam proposal untuk menunjukkan **pemahaman arsitektur data** jika sistem ini nantinya dikembangkan menjadi platform dinamis (menggunakan *backend*).
+Meskipun EduTech adalah website statis, ERD konseptual ini disertakan dalam proposal untuk menunjukkan **pemahaman arsitektur data** jika sistem ini nantinya dikembangkan menjadi platform dinamis (menggunakan *backend*).
 
 ## 1. Visualisasi ERD
 

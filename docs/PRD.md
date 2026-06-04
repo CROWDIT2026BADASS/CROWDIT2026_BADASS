@@ -1,7 +1,7 @@
 # Product Requirements Document (PRD)
 
 ## 1. Latar Belakang
-Dalam era digitalisasi pendidikan, kemudahan akses terhadap informasi dan materi pembelajaran menjadi faktor krusial. Namun, banyak platform edukasi yang ada saat ini membutuhkan spesifikasi perangkat yang tinggi atau memiliki antarmuka yang membingungkan. **EduFuture** dirancang sebagai solusi *frontend-only* yang ringan, responsif, dan interaktif untuk mendemonstrasikan bagaimana informasi pembelajaran dapat disajikan secara efektif tanpa membebani perangkat pengguna.
+Dalam era digitalisasi pendidikan, kemudahan akses terhadap informasi dan materi pembelajaran menjadi faktor krusial. Namun, banyak platform edukasi yang ada saat ini membutuhkan spesifikasi perangkat yang tinggi atau memiliki antarmuka yang membingungkan. **EduTech** dirancang sebagai solusi *frontend-only* yang ringan, responsif, dan interaktif untuk mendemonstrasikan bagaimana informasi pembelajaran dapat disajikan secara efektif tanpa membebani perangkat pengguna.
 
 ## 2. Tujuan dan Target Pengguna
 | Komponen | Deskripsi |

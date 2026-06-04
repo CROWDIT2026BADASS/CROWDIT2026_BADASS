@@ -141,7 +141,7 @@ const FALLBACK_DATA = {
     {
       "name": "Rina Septiani",
       "role": "Mahasiswa Teknik Informatika",
-      "content": "EduFuture benar-benar mengubah cara saya belajar pemrograman. Materinya mudah dipahami dan bisa diakses kapan saja tanpa harus install aplikasi berat.",
+      "content": "EduTech benar-benar mengubah cara saya belajar pemrograman. Materinya mudah dipahami dan bisa diakses kapan saja tanpa harus install aplikasi berat.",
       "rating": 5
     },
     {
@@ -159,24 +159,24 @@ const FALLBACK_DATA = {
     {
       "name": "Andi Firmansyah",
       "role": "Fresh Graduate, Jurusan Ekonomi",
-      "content": "Kursus Public Speaking di EduFuture sangat membantu saya dalam menghadapi sesi wawancara kerja. Materi praktis dan bisa langsung diaplikasikan.",
+      "content": "Kursus Public Speaking di EduTech sangat membantu saya dalam menghadapi sesi wawancara kerja. Materi praktis dan bisa langsung diaplikasikan.",
       "rating": 5
     },
     {
       "name": "Dewi Lestari",
       "role": "Desainer Freelance",
-      "content": "Saya mulai belajar desain grafis dari nol lewat EduFuture. Sekarang saya sudah bisa mengerjakan proyek klien sendiri. Platform terbaik untuk belajar mandiri!",
+      "content": "Saya mulai belajar desain grafis dari nol lewat EduTech. Sekarang saya sudah bisa mengerjakan proyek klien sendiri. Platform terbaik untuk belajar mandiri!",
       "rating": 5
     }
   ],
   "faq": [
     {
-      "question": "Apakah semua kelas di EduFuture gratis?",
-      "answer": "Ya, EduFuture adalah platform purwarupa (prototype) yang dirancang untuk mendemonstrasikan kemudahan akses pendidikan. Semua konten yang tersedia saat ini dapat diakses secara gratis tanpa perlu membuat akun."
+      "question": "Apakah semua kelas di EduTech gratis?",
+      "answer": "Ya, EduTech adalah platform purwarupa (prototype) yang dirancang untuk mendemonstrasikan kemudahan akses pendidikan. Semua konten yang tersedia saat ini dapat diakses secara gratis tanpa perlu membuat akun."
     },
     {
-      "question": "Apakah saya perlu menginstal aplikasi untuk mengakses EduFuture?",
-      "answer": "Tidak perlu! EduFuture dirancang sebagai platform berbasis web yang ringan. Cukup buka melalui peramban (Chrome, Firefox, Safari, Edge) di perangkat apapun — desktop, tablet, maupun smartphone."
+      "question": "Apakah saya perlu menginstal aplikasi untuk mengakses EduTech?",
+      "answer": "Tidak perlu! EduTech dirancang sebagai platform berbasis web yang ringan. Cukup buka melalui peramban (Chrome, Firefox, Safari, Edge) di perangkat apapun — desktop, tablet, maupun smartphone."
     },
     {
       "question": "Bagaimana cara mendaftar ke sebuah kelas?",
@@ -188,15 +188,15 @@ const FALLBACK_DATA = {
     },
     {
       "question": "Bagaimana cara mendaftar webinar atau kelas offline?",
-      "answer": "Temukan kegiatan yang kamu inginkan di bagian Jadwal Kegiatan, lalu hubungi tim EduFuture melalui informasi kontak yang tersedia. Kami akan mengirimkan detail pendaftaran dan tautan kegiatan melalui email."
+      "answer": "Temukan kegiatan yang kamu inginkan di bagian Jadwal Kegiatan, lalu hubungi tim EduTech melalui informasi kontak yang tersedia. Kami akan mengirimkan detail pendaftaran dan tautan kegiatan melalui email."
     },
     {
-      "question": "Apakah materi di EduFuture cocok untuk semua tingkat kemampuan?",
+      "question": "Apakah materi di EduTech cocok untuk semua tingkat kemampuan?",
       "answer": "Ya. Setiap kelas memiliki label tingkat kesulitan (Pemula, Menengah, Lanjutan) sehingga kamu bisa memilih materi yang paling sesuai dengan kemampuan dan tujuan belajarmu saat ini."
     },
     {
-      "question": "Bisakah saya mengakses EduFuture di smartphone?",
-      "answer": "Tentu saja! EduFuture dibangun dengan prinsip mobile-first dan responsif penuh. Tampilan dan fungsionalitas berjalan optimal di semua ukuran layar, termasuk smartphone dengan lebar layar di bawah 576px."
+      "question": "Bisakah saya mengakses EduTech di smartphone?",
+      "answer": "Tentu saja! EduTech dibangun dengan prinsip mobile-first dan responsif penuh. Tampilan dan fungsionalitas berjalan optimal di semua ukuran layar, termasuk smartphone dengan lebar layar di bawah 576px."
     }
   ]
 };
@@ -210,7 +210,7 @@ async function loadContent() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return await response.json();
   } catch (err) {
-    console.warn('[EduFuture] Gagal memuat content.json via fetch, menggunakan fallback local data:', err.message);
+    console.warn('[EduTech] Gagal memuat content.json via fetch, menggunakan fallback local data:', err.message);
     return FALLBACK_DATA;
   }
 }
@@ -264,10 +264,19 @@ function initFullscreenMenu() {
   const splatterTransition = document.getElementById('splatter-transition');
   const finalScene = document.getElementById('final-cinematic-scene');
 
-  function triggerCinematicTransition() {
+  function triggerCinematicTransition(e) {
     if (!splatterTransition || !finalScene) {
       closeMenu();
       return;
+    }
+
+    // Get the title of the clicked card and update the final scene text
+    if (e && e.currentTarget) {
+      const cardTitle = e.currentTarget.querySelector('.chapter-card__title');
+      const finalSceneText = finalScene.querySelector('h2');
+      if (cardTitle && finalSceneText) {
+        finalSceneText.innerHTML = `SELAMAT DATANG <br> DI KELAS ${cardTitle.innerText}`;
+      }
     }
 
     // Trigger splatter transition
@@ -463,7 +472,7 @@ function initCourseCatalog(courses) {
     btn.classList.add('is-enrolled');
     btn.disabled = true;
 
-    console.info(`[EduFuture] Pengguna mendaftar: ${title}`);
+    console.info(`[EduTech] Pengguna mendaftar: ${title}`);
   });
 }
 
