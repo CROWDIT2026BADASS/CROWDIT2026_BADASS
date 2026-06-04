@@ -569,16 +569,11 @@ button {
 .menu-splash {
   position: absolute;
   inset: 0;
+  background: var(--color-primary);
   z-index: 100;
   pointer-events: none;
   opacity: 0;
   mix-blend-mode: screen;
-}
-
-.menu-splash svg {
-  width: 100%;
-  height: 100%;
-  display: block;
 }
 
 .fullscreen-menu.is-open .menu-splash {

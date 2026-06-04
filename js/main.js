@@ -256,7 +256,7 @@ function initFullscreenMenu() {
   });
 
   if (closeBtn) {
-    closeBtn.addEventListener('click', triggerCinematicTransition);
+    closeBtn.addEventListener('click', closeMenu);
   }
 
   // Handle Chapter click for Cinematic Transition
