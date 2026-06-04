@@ -235,10 +235,15 @@ function initFullscreenMenu() {
   }
 
   function closeMenu() {
+    menu.classList.add('is-closing');
     menu.classList.remove('is-open');
     document.body.classList.remove('menu-open');
     toggleBtn.setAttribute('aria-expanded', 'false');
     if (selector) selector.classList.remove('is-visible');
+    
+    setTimeout(() => {
+      menu.classList.remove('is-closing');
+    }, 400);
   }
 
   toggleBtn.addEventListener('click', (e) => {
@@ -251,8 +256,38 @@ function initFullscreenMenu() {
   });
 
   if (closeBtn) {
-    closeBtn.addEventListener('click', closeMenu);
+    closeBtn.addEventListener('click', triggerCinematicTransition);
   }
+
+  // Handle Chapter click for Cinematic Transition
+  const chapterCards = document.querySelectorAll('.js-chapter-card');
+  const splatterTransition = document.getElementById('splatter-transition');
+  const finalScene = document.getElementById('final-cinematic-scene');
+
+  function triggerCinematicTransition() {
+    if (!splatterTransition || !finalScene) {
+      closeMenu();
+      return;
+    }
+
+    // Trigger splatter transition
+    splatterTransition.classList.add('is-active');
+
+    // Hide menu after a short delay to match splatter animation
+    setTimeout(() => {
+      closeMenu();
+      finalScene.classList.add('is-visible');
+    }, 300);
+
+    // Remove splatter transition after it finishes
+    setTimeout(() => {
+      splatterTransition.classList.remove('is-active');
+    }, 1500);
+  }
+
+  chapterCards.forEach(card => {
+    card.addEventListener('click', triggerCinematicTransition);
+  });
 
   menuLinks.forEach(link => {
     link.addEventListener('click', (e) => {
@@ -376,23 +411,24 @@ function initStickyHeader() {
 // ============================================================
 function buildCourseCard(course) {
   return `
-    <article class="course-card js-course-card" data-category="${course.category}">
-      <div class="course-card__icon" aria-hidden="true">${course.icon}</div>
-      <div class="course-card__body">
-        <span class="course-card__badge">${course.level}</span>
-        <h3 class="course-card__title">${course.title}</h3>
-        <p class="course-card__desc">${course.description}</p>
-      </div>
-      <div class="course-card__footer">
-        <span class="course-card__duration">
-          <i class="fa-regular fa-clock" aria-hidden="true"></i>
-          ${course.duration_minutes} menit
-        </span>
-        <button class="btn-enroll js-enroll-btn" data-course-id="${course.id}" data-course-title="${course.title}">
-          Daftar
-        </button>
-      </div>
-    </article>
+    <div class="col-md-6 col-lg-4 course-card-wrapper js-course-card" data-category="${course.category}">
+      <article class="card h-100 bg-dark text-white border-0 border-start border-danger border-4 rounded-0 shadow-sm transition-smooth course-card-hover">
+        <div class="card-body p-4 d-flex flex-column">
+          <div class="fs-1 mb-4" aria-hidden="true">${course.icon}</div>
+          <span class="badge bg-danger text-uppercase tracking-wider align-self-start mb-3 font-heading">${course.level}</span>
+          <h3 class="card-title font-display fs-2 text-uppercase mb-3">${course.title}</h3>
+          <p class="card-text text-secondary mb-4 flex-grow-1 font-body">${course.description}</p>
+        </div>
+        <div class="card-footer bg-transparent border-secondary d-flex justify-content-between align-items-center p-4">
+          <span class="text-white font-heading">
+            <i class="fa-regular fa-clock" aria-hidden="true"></i> ${course.duration_minutes} menit
+          </span>
+          <button class="btn btn-outline-danger text-uppercase tracking-wider fw-bold rounded-0 js-enroll-btn" data-course-id="${course.id}" data-course-title="${course.title}">
+            Daftar
+          </button>
+        </div>
+      </article>
+    </div>
   `.trim();
 }
 
@@ -451,15 +487,15 @@ function initSchedule(scheduleItems) {
     .map(
       item => `
       <tr class="schedule-row">
-        <td data-label="Tanggal">${formatEventDate(item.event_date)}</td>
-        <td data-label="Kegiatan">${item.event_name}</td>
-        <td data-label="Kategori">
-          <span class="schedule-badge schedule-badge--${item.category}">${item.category}</span>
+        <td data-label="Tanggal" class="p-4">${formatEventDate(item.event_date)}</td>
+        <td data-label="Kegiatan" class="p-4 text-white">${item.event_name}</td>
+        <td data-label="Kategori" class="p-4">
+          <span class="badge bg-secondary text-uppercase">${item.category}</span>
         </td>
-        <td data-label="Mode">
-          <span class="schedule-mode schedule-mode--${item.mode}">${item.mode}</span>
+        <td data-label="Mode" class="p-4">
+          <span class="badge ${item.mode === 'online' ? 'bg-success' : 'bg-warning text-dark'} text-uppercase">${item.mode}</span>
         </td>
-        <td data-label="Waktu">${item.event_time}</td>
+        <td data-label="Waktu" class="p-4">${item.event_time}</td>
       </tr>
     `.trim()
     )
@@ -474,17 +510,19 @@ function buildTestimonialSlide(testimonial) {
   const initial = testimonial.name.charAt(0).toUpperCase();
 
   return `
-    <div class="testimonial-slide js-testimonial-slide" role="group" aria-label="Ulasan dari ${testimonial.name}">
-      <div class="testimonial-card">
-        <div class="testimonial-card__rating" aria-label="Rating: ${testimonial.rating} dari 5">
-          ${stars}
-        </div>
-        <blockquote class="testimonial-card__content">"${testimonial.content}"</blockquote>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar" aria-hidden="true">${initial}</div>
-          <div>
-            <p class="testimonial-card__name">${testimonial.name}</p>
-            <p class="testimonial-card__role">${testimonial.role}</p>
+    <div class="testimonial-slide js-testimonial-slide w-100 flex-shrink-0" role="group" aria-label="Ulasan dari ${testimonial.name}">
+      <div class="card bg-transparent border-0 text-center px-4">
+        <div class="card-body">
+          <div class="text-danger fs-3 mb-4" aria-label="Rating: ${testimonial.rating} dari 5">
+            ${stars}
+          </div>
+          <blockquote class="font-display display-5 text-uppercase text-white lh-1 mb-5">"${testimonial.content}"</blockquote>
+          <div class="d-flex align-items-center justify-content-center gap-3">
+            <div class="bg-danger text-white d-flex align-items-center justify-content-center font-display fs-3" style="width: 60px; height: 60px; clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);" aria-hidden="true">${initial}</div>
+            <div class="text-start">
+              <p class="font-heading fs-5 text-white mb-0 text-uppercase tracking-wider">${testimonial.name}</p>
+              <p class="text-secondary mb-0">${testimonial.role}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -581,15 +619,15 @@ function initTestimonialSlider(testimonials) {
 // ============================================================
 function buildFAQItem(faq, index) {
   return `
-    <div class="faq-item js-faq-item">
+    <div class="faq-item js-faq-item border-bottom border-secondary">
       <button
-        class="faq-question js-faq-question"
+        class="faq-question js-faq-question w-100 d-flex justify-content-between align-items-center py-4 px-0 bg-transparent border-0 text-white font-display fs-2 text-uppercase text-start"
         aria-expanded="false"
         aria-controls="faq-answer-${index}"
         id="faq-question-${index}"
       >
         <span>${faq.question}</span>
-        <i class="fa-solid fa-chevron-down faq-icon" aria-hidden="true"></i>
+        <i class="fa-solid fa-chevron-down faq-icon text-secondary" aria-hidden="true"></i>
       </button>
       <div
         class="faq-answer js-faq-answer"
@@ -597,7 +635,7 @@ function buildFAQItem(faq, index) {
         role="region"
         aria-labelledby="faq-question-${index}"
       >
-        <p>${faq.answer}</p>
+        <p class="font-body text-secondary fs-5 pb-4 m-0">${faq.answer}</p>
       </div>
     </div>
   `.trim();
