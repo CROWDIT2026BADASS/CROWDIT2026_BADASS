@@ -747,7 +747,7 @@ function initCinematicScroll() {
 }
 
 // ============================================================
-// PPT SLIDE TRANSITION (Section Wipe)
+// PPT SLIDE TRANSITION & DYNAMIC SCROLL (Section Wipe)
 // ============================================================
 function initSlideWipe() {
   const slideWrapper = document.getElementById('slide-wrapper');
@@ -756,42 +756,113 @@ function initSlideWipe() {
   const slides = slideWrapper.querySelectorAll('.slide-section');
   if (slides.length === 0) return;
 
-  // Set total height of the wrapper to accommodate all slides
-  // Each slide represents 100vh of scrolling to wipe away
-  slideWrapper.style.height = `${slides.length * 100}vh`;
+  let edges = document.querySelectorAll('.slide-edge');
+  if (edges.length === 0) {
+    slides.forEach((slide, index) => {
+      if (index === slides.length - 1) return;
+      const edge = document.createElement('div');
+      edge.className = 'slide-edge';
+      document.body.appendChild(edge);
+    });
+    edges = document.querySelectorAll('.slide-edge');
+  }
+
+  function calculateAndApplyScroll() {
+    const wh = window.innerHeight;
+    const ww = window.innerWidth;
+    const angleRad = Math.atan2(-20 * wh / 100, ww);
+    const angleDeg = angleRad * (180 / Math.PI);
+
+    let currentStart = 0;
+    const slideData = [];
+    
+    slides.forEach((slide, index) => {
+      const content = slide.querySelector('.slide-content');
+      // Calculate how much we need to scroll internally to see the full content
+      // Adding a 50px buffer so it doesn't feel cramped
+      const contentHeight = content ? content.scrollHeight : wh;
+      const maxScroll = Math.max(0, contentHeight - wh + 50); 
+      
+      // Last slide doesn't wipe
+      const wipeDistance = (index === slides.length - 1) ? 0 : wh; 
+      
+      slideData.push({
+        contentScrollStart: currentStart,
+        contentScrollEnd: currentStart + maxScroll,
+        wipeStart: currentStart + maxScroll,
+        wipeEnd: currentStart + maxScroll + wipeDistance,
+        maxTranslate: maxScroll
+      });
+      
+      currentStart += (maxScroll + wipeDistance);
+    });
+
+    // Set wrapper total height based on actual content
+    slideWrapper.style.height = `${currentStart}px`;
+
+    return { slideData, angleDeg, wh };
+  }
+
+  let { slideData, angleDeg, wh } = calculateAndApplyScroll();
+
+  // Recalculate on window resize
+  window.addEventListener('resize', () => {
+    const res = calculateAndApplyScroll();
+    slideData = res.slideData;
+    angleDeg = res.angleDeg;
+    wh = res.wh;
+  });
 
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
-    const wh = window.innerHeight;
     const wrapperTop = slideWrapper.offsetTop;
+    const relativeScroll = scrollY - wrapperTop;
 
     slides.forEach((slide, index) => {
-      // The last slide doesn't wipe away, it stays visible at the end
+      const data = slideData[index];
+      const content = slide.querySelector('.slide-content');
+
+      // 1. DYNAMIC CONTENT SCROLLING
+      // Translate the content up seamlessly tied to window scroll
+      if (content) {
+        if (relativeScroll >= data.contentScrollStart && relativeScroll <= data.contentScrollEnd) {
+          const progress = (relativeScroll - data.contentScrollStart) / (data.maxTranslate || 1);
+          content.style.transform = `translateY(-${progress * data.maxTranslate}px)`;
+        } else if (relativeScroll > data.contentScrollEnd) {
+          content.style.transform = `translateY(-${data.maxTranslate}px)`;
+        } else {
+          content.style.transform = `translateY(0px)`;
+        }
+      }
+
+      // 2. PPT WIPE TRANSITION
       if (index === slides.length - 1) {
         slide.style.clipPath = 'polygon(0 0, 100% 0, 100% 100%, 0 100%)';
         return;
       }
 
-      // The point where this slide starts wiping away
-      const wipeStart = wrapperTop + (index * wh);
-      const wipeEnd = wipeStart + wh;
-
-      let progress = 0;
-      if (scrollY >= wipeStart && scrollY <= wipeEnd) {
-        progress = (scrollY - wipeStart) / wh;
-      } else if (scrollY > wipeEnd) {
-        progress = 1;
+      let wipeProgress = 0;
+      if (relativeScroll >= data.wipeStart && relativeScroll <= data.wipeEnd) {
+        wipeProgress = (relativeScroll - data.wipeStart) / wh;
+      } else if (relativeScroll > data.wipeEnd) {
+        wipeProgress = 1;
       }
 
-      // Calculate diagonal cut
-      // Start (p=0): BL=120%, BR=100% (Fully visible)
-      // End (p=1): BL=-20%, BR=-40% (Fully wiped/hidden)
-      // The diagonal is constant: Left side is always 20% lower than Right side
-      let bl = 120 - (progress * 140);
-      let br = 100 - (progress * 140);
-
-      // Apply dynamic clip-path
+      let bl = 120 - (wipeProgress * 140);
+      let br = 100 - (wipeProgress * 140);
       slide.style.clipPath = `polygon(0 0, 100% 0, 100% ${br}%, 0 ${bl}%)`;
+
+      // Update neon edge
+      const edge = edges[index];
+      if (edge) {
+        if (wipeProgress > 0 && wipeProgress < 1) {
+          edge.style.display = 'block';
+          edge.style.top = `${bl}vh`;
+          edge.style.transform = `rotate(${angleDeg}deg)`;
+        } else {
+          edge.style.display = 'none';
+        }
+      }
     });
   }, { passive: true });
 }
@@ -805,7 +876,6 @@ async function init() {
   initScrollReveal();
   initStickyHeader();
   initCinematicScroll();
-  initSlideWipe();
 
   const data = await loadContent();
   if (!data) return;
@@ -814,6 +884,10 @@ async function init() {
   initSchedule(data.schedule);
   initTestimonialSlider(data.testimonials);
   initFAQ(data.faq);
+  
+  // Initialize the slide wipe AFTER all content (like the schedule table) 
+  // is fully injected and rendered so we get accurate scrollHeight!
+  setTimeout(initSlideWipe, 50);
 }
 
 document.addEventListener('DOMContentLoaded', init);

@@ -1084,7 +1084,7 @@ body.menu-open {
   top: 0;
   height: 100vh;
   width: 100%;
-  overflow: hidden;
+  overflow: hidden !important; /* Force hide overflow, JS will handle scrolling */
   background-color: var(--color-dark);
   background-position: center;
   background-size: cover;
@@ -1094,39 +1094,27 @@ body.menu-open {
 }
 
 .slide-content {
-  height: 100%;
-  overflow-y: auto;
+  height: auto; /* Allow natural height for dynamic calculation */
+  overflow: visible !important; /* Remove internal scrollbar */
   /* Padding for navbar and visual balance */
   padding-top: 100px;
   padding-bottom: 80px;
-  /* Custom scrollbar for inner content */
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-danger) transparent;
+  will-change: transform;
 }
 
-.slide-content::-webkit-scrollbar {
-  width: 6px;
-}
-.slide-content::-webkit-scrollbar-thumb {
-  background-color: var(--color-danger);
-  border-radius: 10px;
-}
-
-/* Glowing Neon Edge to destroy the "flat" look */
-.slide-section::before {
-  content: '';
-  position: absolute;
-  /* The line position is dynamic, so we place it at the bottom 
-     and it will be clipped naturally by the section's clip-path! */
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+/* Glowing Neon Edge to make the cut "clear" and "hidup" */
+.slide-edge {
+  position: fixed;
+  left: -5vw;
+  width: 110vw;
+  height: 4px;
+  background: var(--color-danger);
+  box-shadow: 0 0 20px 4px rgba(220, 53, 69, 0.8), 0 0 10px 1px rgba(255, 255, 255, 0.5);
+  transform-origin: 5vw 50%;
+  z-index: 9999;
   pointer-events: none;
-  /* We use a drop-shadow on the element wrapper or a border.
-     Since clip-path cuts things off, the easiest way to add an edge line 
-     is via JS or a very specific gradient. We'll skip the pseudo-element 
-     for now to keep the JS wipe perfectly clean as requested. */
+  will-change: top, transform;
+  display: none;
 }
 
 /* Rich Backgrounds instead of flat colors */
@@ -1141,4 +1129,35 @@ body.menu-open {
 }
 .bg-skew-4 { 
   background-image: linear-gradient(135deg, #161616 0%, #000000 100%); 
+}
+
+/* ==========================================================================
+   GLASSMORPHISM
+   ========================================================================== */
+.glass-container {
+  background: rgba(15, 15, 15, 0.45) !important;
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6) !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Force elements inside to be transparent so the glass effect shines through */
+.glass-container table,
+.glass-container table th,
+.glass-container table td,
+.glass-container table tr,
+.glass-container .table-dark {
+  background-color: transparent !important;
+  --bs-table-bg: transparent !important;
+  --bs-table-striped-bg: transparent !important;
+  --bs-table-hover-bg: rgba(255, 255, 255, 0.08) !important;
+  --bs-table-active-bg: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Subtle hover effect for table rows inside the glass container */
+.glass-container .table-hover > tbody > tr:hover > * {
+  --bs-table-accent-bg: rgba(255, 255, 255, 0.08) !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
 }
